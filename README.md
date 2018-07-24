@@ -12,7 +12,7 @@ Documentação da API: [Bitcoin Trade](https://apidocs.bitcointrade.com.br/)
 Para ter acesso aos métodos da classe você deve ter a API em mão e seguir o seguinte código:
 ```php
 // importar classe
-require ("blinktrade.php");
+require ("bitcointrade.php");
 
 // Cria instancia da classe Bitcoin Trade
 $apiKey = ''; // colocar a sua API nessa variável

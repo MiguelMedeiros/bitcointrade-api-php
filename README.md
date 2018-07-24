@@ -1,10 +1,12 @@
 # BitcoinTrade API (PHP)
 Descrição: Classe para API da exchange brasileira Bitcoin Trade em PHP.
 
-
 Autor: Miguel Medeiros - [www.miguelmedeiros.com.br](https://www.miguelmedeiros.com.br)<br />
 Exchange: [Bitcoin Trade](https://www.bitcointrade.com.br/)<br />
 Documentação da API: [Bitcoin Trade](https://apidocs.bitcointrade.com.br/)
+
+Gostou? Então me pague um café!<br/>
+BTC Wallet: 1FkPLxYn7L2PQDgVawUhx8WpyrnNWhPWYN
 
 ---
 

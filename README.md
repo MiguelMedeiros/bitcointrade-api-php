@@ -1,4 +1,4 @@
-# Bitcointrade API (PHP)
+# BitcoinTrade API (PHP)
 Descrição: Classe para API da exchange brasileira Bitcoin Trade em PHP.
 
 
@@ -76,7 +76,7 @@ $sellOrder = $exchange->createOrder($currency, $amount, $type, $subtype, $unitPr
 var_dump($sellOrder);
 ```
 
-#### Cancel Order
+### Cancel Order
 ```php
 $orderId = 'U2FsdGVkX1+qrxVqoDbSYh9wCvhhrP63SMy01Sn27Ag=';
 $cancelOrder = $exchange->cancelOrder($orderId);

@@ -4,7 +4,7 @@
     // **********************************************
   
     // importar classe
-    require ("bitcoinTrade.php");
+    require ("bitcointrade.php");
 
     // Cria instancia da classe Bitcoin Trade
     $apiKey = '';

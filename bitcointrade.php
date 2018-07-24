@@ -1,8 +1,8 @@
 <?php
-  
+
 	class bitcoinTrade{
 
-		protected $apiKey = null;
+        protected $apiKey = null;
         protected $curl = null;
     
 		public function __construct(){

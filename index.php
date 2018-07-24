@@ -1,10 +1,10 @@
 <?php
-	// **********************************************
+    // **********************************************
     // Exemplo de uso Exchange www.BitcoinTrade.com.br
     // **********************************************
   
     // importar classe
-    require ("blinktrade.php");
+    require ("bitcoinTrade.php");
 
     // Cria instancia da classe Bitcoin Trade
     $apiKey = '';

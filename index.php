@@ -31,6 +31,9 @@
     // get orderbook
     //$orderbook = $exchange->orderbook($currency);
     //var_dump($orderbook->data);
+    //var_dump($orderbook->data->buying);
+    //var_dump($orderbook->data->selling);
+    //var_dump($orderbook->data->executed);
 
     // get summary
     //$summary = $exchange->summary($currency);
@@ -61,7 +64,7 @@
 
     // get user orders
     $status = 'waiting'; // Status da ordem - executed_completely / executed_partially / waiting / canceled (STRING)
-    $hours = 24;
+    $hours = 24; // últimas 24 hras
     $type = "sell"; // Tipo da ordem - buy / sell (STRING)
     //$userOrders = $exchange->userOrders($currency, $status, $hours, $type, $page_size, $current_page);
     //var_dump($userOrders->data);

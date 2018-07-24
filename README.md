@@ -3,10 +3,10 @@ Classe para API da exchange brasileira Bitcoin Trade em PHP.
 
 
 Autor: Miguel Medeiros - [www.miguelmedeiros.com.br](https://www.miguelmedeiros.com.br)
-
 Exchange: [Bitcoin Trade](https://www.bitcointrade.com.br/)
-
 Documentação da API: [Bitcoin Trade](https://apidocs.bitcointrade.com.br/)
+
+---
 
 ## Como utilizar
 Para ter acesso aos métodos da classe você deve ter a API em mão e seguir o seguinte código:

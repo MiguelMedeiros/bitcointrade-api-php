@@ -1,109 +1,79 @@
-# BitcoinTrade API (PHP)
-Descrição: Classe para API da exchange brasileira Bitcoin Trade em PHP.
+<?php
+// **********************************************
+// Exemplo de uso Exchange www.BitcoinTrade.com.br
+// **********************************************
 
-Autor: Miguel Medeiros - [www.miguelmedeiros.com.br](https://www.miguelmedeiros.com.br)<br />
-Exchange: [Bitcoin Trade](https://www.bitcointrade.com.br/)<br />
-Documentação da API: [Bitcoin Trade](https://apidocs.bitcointrade.com.br/)
-
-Gostou? Então me pague um café!<br/>
-BTC Wallet: 1FkPLxYn7L2PQDgVawUhx8WpyrnNWhPWYN
-
----
-
-## Como utilizar
-Para ter acesso aos métodos da classe você deve ter a API em mão e seguir o seguinte código:
-```php
 // importar classe
-require ("bitcointrade.php");
+require('bitcointrade.php');
 
 // Cria instancia da classe Bitcoin Trade
-$apiKey = ''; // colocar a sua API nessa variável
-$exchange = new bitcoinTrade($apiKey);
+$apiKey = '';
+$exchange = new BitcoinTrade($apiKey);
 
-// variáveis para parametrização gerais
+// variáveis para parametrização
 $currency = 'BTC';
 $hours = 1;
 $page_size = 100;
-$current_page = 1;   
-```
-## Métodos
-### Get Ticker
-```php
-$ticker = $exchange->ticker($currency);
-var_dump($ticker->data);
-```
+$current_page = 1;
 
-### Get Orders
-```php
-$orders = $exchange->orders($currency);
-var_dump($orders->data);
-```
+// get ticker
+//$ticker = $exchange->ticker($currency);
+//var_dump($ticker->data);
 
-### Get Trades
-```php
-$trades = $exchange->trades($currency, $hours, $page_size, $current_page);
-var_dump($trades->data);
-```
+// get orders
+//$orders = $exchange->orders($currency);
+//var_dump($orders->data);
 
-### Get Orderbook
-```php
-$orderbook = $exchange->orderbook($currency);
-var_dump($orderbook->data);
-```
+// get trades
+//$trades = $exchange->trades($currency, $hours, $page_size, $current_page);
+//var_dump($trades->data);
 
-### Get Summary
-```php
-$summary = $exchange->summary($currency);
-var_dump($summary->data);
-```
+// get orderbook
+//$orderbook = $exchange->orderbook($currency);
+//var_dump($orderbook->data);
+//var_dump($orderbook->data->buying);
+//var_dump($orderbook->data->selling);
+//var_dump($orderbook->data->executed);
 
-### Create Order
-#### Buy
-```php
+// get summary
+//$summary = $exchange->summary($currency);
+//var_dump($summary->data);
+
+// create order
+// buy
 $amount = 0.001; // Quantidade da moeda - (FLOAT)
 $type ="buy"; // Tipo da ordem - buy / sell (STRING)
 $subtype = "limited"; // Subtipo da ordem - limited / market (STRING)
 $unitPrice = 10000; // Preço de unidade da moeda - (FLOAT)
-$buyOrder = $exchange->createOrder($currency, $amount, $type, $subtype, $unitPrice);
-var_dump($buyOrder);
-```
+//$buyOrder = $exchange->createOrder($currency, $amount, $type, $subtype, $unitPrice);
+//var_dump($buyOrder);
 
-#### Sell
-```php
+// sell
 $amount = 0.001; // Quantidade da moeda - (FLOAT)
 $type ="sell"; // Tipo da ordem - buy / sell (STRING)
 $subtype="limited"; // Subtipo da ordem - limited / market (STRING)
 $unitPrice = 30000; // Preço de unidade da moeda - (FLOAT)
-$sellOrder = $exchange->createOrder($currency, $amount, $type, $subtype, $unitPrice);
-var_dump($sellOrder);
-```
+//$sellOrder = $exchange->createOrder($currency, $amount, $type, $subtype, $unitPrice);
+//var_dump($sellOrder);
 
-### Cancel Order
-```php
+// cancel order
 $orderId = 'U2FsdGVkX1+qrxVqoDbSYh9wCvhhrP63SMy01Sn27Ag=';
-$cancelOrder = $exchange->cancelOrder($orderId);
-var_dump($cancelOrder);
-```
+//$cancelOrder = $exchange->cancelOrder($orderId);
+//var_dump($cancelOrder);
 
-### Get User Orders
-```php
+// get user orders
 $status = 'waiting'; // Status da ordem - executed_completely / executed_partially / waiting / canceled (STRING)
-$hours = 24;
+$hours = 24; // últimas 24 hras
 $type = "sell"; // Tipo da ordem - buy / sell (STRING)
-$userOrders = $exchange->userOrders($currency, $status, $hours, $type, $page_size, $current_page);
-var_dump($userOrders->data);
-```
+//$userOrders = $exchange->userOrders($currency, $status, $hours, $type, $page_size, $current_page);
+//var_dump($userOrders->data);
 
-### Estimated Price
-```php
+// estimated price
 $amount = 100;
 $type ="buy";
-$estimatedPrice = $exchange->estimatedPrice($currency, $amount, $type);
-var_dump($estimatedPrice->data);
-```
+//$estimatedPrice = $exchange->estimatedPrice($currency, $amount, $type);
+//var_dump($estimatedPrice->data);
 
-### Get Balance
-```php
-$balance = $exchange->balance();
-var_dump($balance->data);
-```
+// balance
+//$balance = $exchange->balance();
+//var_dump($balance);

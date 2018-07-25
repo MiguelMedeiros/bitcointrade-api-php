@@ -16,64 +16,18 @@ class BitcoinTrade
     {
         $this->curl = curl_init();
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/public/".$currency."/ticker",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/json"
-            )
-        );
+        $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/ticker";
 
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $this->initCurl($apiURL);
     }
 
     public function orders($currency = 'BTC')
     {
         $this->curl = curl_init();
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/public/".$currency."/orders",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/json"
-            )
-        );
+        $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/orders";
 
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $this->initCurl($apiURL);
     }
 
     public function trades(
@@ -97,99 +51,27 @@ class BitcoinTrade
 
         $this->curl = curl_init();
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/public/".$currency."/trades?start_time=".$start_time."&end_time=".$end_time."&page_size=".$page_size."&current_page=".$current_page,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/json"
-            )
-        );
+        $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/trades?start_time={$start_time}&end_time={$end_time}&page_size={$page_size}&current_page={$current_page}";
 
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $this->initCurl($apiURL);
     }
 
     public function orderbook($currency = 'BTC')
     {
         $this->curl = curl_init();
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/market?currency=".$currency,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: ApiToken ".$this->apiKey,
-                "Content-Type: application/json"
-            )
-        );
+        $apiURL = "https://api.bitcointrade.com.br/v1/market?currency={$currency}";
 
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $this->initCurl($apiURL);
     }
 
     public function summary($currency = 'BTC')
     {
         $this->curl = curl_init();
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/market/summary?currency=".$currency,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: ApiToken ".$this->apiKey,
-                "Content-Type: application/json"
-            )
-        );
+        $apiURL = "https://api.bitcointrade.com.br/v1/market/summary?currency={$currency}";
 
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
-
+        return $this->initCurl($apiURL);
     }
 
     public function userOrders(
@@ -213,135 +95,30 @@ class BitcoinTrade
         $end_time->setTimezone($timeZone);
         $end_time = date_format($end_time, DateTime::ATOM);
 
-        $this->curl = curl_init();
+        $apiURL = "https://api.bitcointrade.com.br/v1/market/user_orders/list?status={$status}&start_date={$start_time}&end_date={$end_time}&currency={$currency}&type={$type}&page_size={$page_size}&current_page={$current_page}";
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/market/user_orders/list?status=".$status."&start_date=".$start_time."&end_date=".$end_time."&currency=".$currency."&type=".$type."&page_size=".$page_size."&current_page=".$current_page,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: ApiToken ".$this->apiKey,
-                "Content-Type: application/json"
-            )
-        );
-
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $this->initCurl($apiURL);
     }
 
-    public function cancelOrder($orderId = '')
+    public function cancelOrder($id = '')
     {
-        $this->curl = curl_init();
+        $fields = compact('id');
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/market/user_orders/",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "DELETE",
-            CURLOPT_POSTFIELDS => "{\n  \"id\": \"".$orderId."\"\n}",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: ApiToken ".$this->apiKey,
-                "Content-Type: application/json"
-            )
-        );
-
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $this->initCurl($apiURL, $fields, 'DELETE');
     }
 
     public function estimatedPrice($currency = "BTC", $amount = 0, $type ="buy")
     {
-        $this->curl = curl_init();
+        $apiURL = "https://api.bitcointrade.com.br/v1/market/estimated_price?amount={$amount}&currency={$currency}&type={$type}";
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/market/estimated_price?amount=".$amount."&currency=".$currency."&type=".$type,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: ApiToken ".$this->apiKey,
-                "Content-Type: application/json"
-            )
-        );
-
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $this->initCurl($apiURL);
     }
 
     public function balance()
     {
-        $this->curl = curl_init();
+        $apiURL = 'https://api.bitcointrade.com.br/v1/wallets/balance';
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/wallets/balance",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: ApiToken ".$this->apiKey,
-                "Content-Type: application/json"
-            )
-        );
-
-        curl_setopt_array($this->curl, $options);
-
-        $response = curl_exec($this->curl);
-        $err = curl_error($this->curl);
-
-        curl_close($this->curl);
-
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $this->initCurl($apiURL);
     }
 
     public function createOrder(
@@ -351,36 +128,44 @@ class BitcoinTrade
         $subtype="limited",
         $unitPrice = 0
     ) {
-        $this->curl = curl_init();
+        $fields = compact('currency', 'amount', 'type', 'subtype', 'unitPrice');
 
-        $options = array(
-            CURLOPT_URL => "https://api.bitcointrade.com.br/v1/market/create_order",
+        $apiURL = 'https://api.bitcointrade.com.br/v1/market/create_order';
+
+        return $this->initCurl($apiURL, $fields, 'POST');
+    }
+
+    private function initCurl($url = '', $fields = [], $method = 'GET')
+    {
+        $fields = json_encode($fields);
+
+        $header = [
+            "Authorization: ApiToken {$this->apiKey}",
+            'Content-Type: application/json'
+        ];
+
+        $options = [
+            CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
+            CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "{\n  \"currency\":\"".$currency."\",\n  \"amount\": ".$amount.",\n  \"type\": \"".$type."\",\n  \"subtype\": \"".$subtype."\",\n  \"unit_price\": ".$unitPrice."\n}",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: ApiToken ".$this->apiKey,
-                "Content-Type: application/json"
-            )
-        );
+            CURLOPT_POSTFIELDS => $fields,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_HTTPHEADER => $header
+        ];
 
         curl_setopt_array($this->curl, $options);
 
         $response = curl_exec($this->curl);
+
         $err = curl_error($this->curl);
 
         curl_close($this->curl);
 
-        if ($err) {
-            return "cURL Error #:" . $err;
-        } else {
-            $response = json_decode($response);
-            return $response;
-        }
+        return $err
+            ? "cURL Error #: {$$err}"
+            : json_decode($response);
     }
-
 }

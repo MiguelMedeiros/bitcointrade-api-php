@@ -34,35 +34,26 @@
             $err = curl_error($this->curl);
 
             curl_close($this->curl);
-
-            return array($err, $response);
+            
+            if ($err) {
+                return "cURL Error #:" . $err;
+            } else {
+                $response = json_decode($response);
+                return $response;
+            }            
         }
 
         public function ticker ($currency = 'BTC'){
             
             $url = "https://api.bitcointrade.com.br/v1/public/".$currency."/ticker";
-            $response = $this->initCurl($url);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url);
 
         }
 
         public function orders ($currency = 'BTC'){
 
             $url = "https://api.bitcointrade.com.br/v1/public/".$currency."/orders";
-            $response = $this->initCurl($url);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url);
 
         }
 
@@ -82,42 +73,21 @@
             $end_time = date_format($end_time, DateTime::ATOM);
 
             $url = "https://api.bitcointrade.com.br/v1/public/".$currency."/trades?start_time=".$start_time."&end_time=".$end_time."&page_size=".$page_size."&current_page=".$current_page;
-            $response = $this->initCurl($url);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url);
 
         }
 
         public function orderbook($currency = 'BTC'){
 
             $url = "https://api.bitcointrade.com.br/v1/market?currency=".$currency;
-            $response = $this->initCurl($url);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url);
 
         }
         
         public function summary($currency = 'BTC'){
 
             $url = "https://api.bitcointrade.com.br/v1/market/summary?currency=".$currency;
-            $response = $this->initCurl($url);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url);
 
         }
 
@@ -137,14 +107,7 @@
             $end_time = date_format($end_time, DateTime::ATOM);
 
             $url = "https://api.bitcointrade.com.br/v1/market/user_orders/list?status=".$status."&start_date=".$start_time."&end_date=".$end_time."&currency=".$currency."&type=".$type."&page_size=".$page_size."&current_page=".$current_page;
-            $response = $this->initCurl($url);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url);
 
         }
 
@@ -157,42 +120,21 @@
             $url = "https://api.bitcointrade.com.br/v1/market/user_orders/";
             $method = "DELETE";
 
-            $response = $this->initCurl($url, $fields, $method);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url, $fields, $method);
 
         }
 
         public function estimatedPrice($currency = "BTC", $amount = 0, $type ="buy" ){
 
             $url = "https://api.bitcointrade.com.br/v1/market/estimated_price?amount=".$amount."&currency=".$currency."&type=".$type;
-            $response = $this->initCurl($url);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url);
 
         }
 
         public function balance (){
 
             $url = "https://api.bitcointrade.com.br/v1/wallets/balance";
-            $response = $this->initCurl($url);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url);
 
         }
 
@@ -209,14 +151,7 @@
             $url = "https://api.bitcointrade.com.br/v1/market/create_order";
             $method = 'POST';
 
-            $response = $this->initCurl($url, $fields, $method);
-
-            if ($response[0]) {
-                return "cURL Error #:" . $response[0];
-            } else {
-                $response = json_decode($response[1]);
-                return $response;
-            }
+            return $this->initCurl($url, $fields, $method);
 
         }
 

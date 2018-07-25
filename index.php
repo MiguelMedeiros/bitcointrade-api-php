@@ -77,6 +77,6 @@
 
     // balance
     //$balance = $exchange->balance();
-    //var_dump($balance->data); 
+    //var_dump($balance); 
 
 ?>

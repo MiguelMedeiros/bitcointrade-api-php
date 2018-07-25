@@ -102,7 +102,7 @@ $estimatedPrice = $exchange->estimatedPrice($currency, $amount, $type);
 var_dump($estimatedPrice->data);
 ```
 
-### balance
+### Get Balance
 ```php
 $balance = $exchange->balance();
 var_dump($balance->data);

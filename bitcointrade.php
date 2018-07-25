@@ -12,10 +12,9 @@
         }
         
         public function initCurl($url = ''){
-            
+
             curl_setopt_array($this->curl, array(
                 CURLOPT_URL => $url,
-                CURLOPT_POSTFIELDS => $fields,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,

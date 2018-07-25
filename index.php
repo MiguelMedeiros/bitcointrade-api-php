@@ -62,7 +62,7 @@
     //$cancelOrder = $exchange->cancelOrder($orderId);
     //var_dump($cancelOrder);
 
-    // get user orders
+    // get user orders 
     $status = 'waiting'; // Status da ordem - executed_completely / executed_partially / waiting / canceled (STRING)
     $hours = 24; // últimas 24 hras
     $type = "sell"; // Tipo da ordem - buy / sell (STRING)
@@ -77,6 +77,6 @@
 
     // balance
     //$balance = $exchange->balance();
-    //var_dump($balance->data);
+    //var_dump($balance->data); 
 
 ?>

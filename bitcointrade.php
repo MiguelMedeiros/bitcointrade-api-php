@@ -11,8 +11,10 @@
             $this->apiKey = $arguments[0];
         }
         
-        public function initCurl($url = ''){
+        public function initCurl($url = '', $fields = array(), $method = "GET"){
 
+            $fields = json_encode($fields);
+            
             curl_setopt_array($this->curl, array(
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
@@ -20,7 +22,8 @@
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => $fields,
+                CURLOPT_CUSTOMREQUEST => $method,
                 CURLOPT_HTTPHEADER => array(
                     "Authorization: ApiToken ".$this->apiKey,
                     "Content-Type: application/json"
@@ -87,6 +90,7 @@
                 $response = json_decode($response[1]);
                 return $response;
             }
+
         }
 
         public function orderbook($currency = 'BTC'){
@@ -141,38 +145,27 @@
                 $response = json_decode($response[1]);
                 return $response;
             }
+
         }
 
         public function cancelOrder ($orderId = ''){
 
-            $this->curl = curl_init();
+            $fields = array(
+                "id"   => $orderId
+            );
 
-            curl_setopt_array($this->curl, array(
-                CURLOPT_URL => "https://api.bitcointrade.com.br/v1/market/user_orders/",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "DELETE",
-                CURLOPT_POSTFIELDS => "{\n  \"id\": \"".$orderId."\"\n}",
-                CURLOPT_HTTPHEADER => array(
-                    "Authorization: ApiToken ".$this->apiKey,
-                    "Content-Type: application/json"
-                )
-            ));
+            $url = "https://api.bitcointrade.com.br/v1/market/user_orders/";
+            $method = "DELETE";
 
-            $response = curl_exec($this->curl);
-            $err = curl_error($this->curl);
+            $response = $this->initCurl($url, $fields, $method);
 
-            curl_close($this->curl);
-
-            if ($err) {
-                return "cURL Error #:" . $err;
+            if ($response[0]) {
+                return "cURL Error #:" . $response[0];
             } else {
-                $response = json_decode($response);
+                $response = json_decode($response[1]);
                 return $response;
             }
+
         }
 
         public function estimatedPrice($currency = "BTC", $amount = 0, $type ="buy" ){
@@ -186,6 +179,7 @@
                 $response = json_decode($response[1]);
                 return $response;
             }
+
         }
 
         public function balance (){
@@ -199,38 +193,31 @@
                 $response = json_decode($response[1]);
                 return $response;
             }
+
         }
 
         public function createOrder($currency = "BTC", $amount = 0, $type ="buy", $subtype="limited", $unitPrice = 0){
 
-            $this->curl = curl_init();
+            $fields = array(
+                "currency"   => $currency,
+                "amount"     => $amount,
+                "type"       => $type,
+                "subtype"    => $subtype,
+                "unitPrice"  => $unitPrice,
+            );
 
-            curl_setopt_array($this->curl, array(
-                CURLOPT_URL => "https://api.bitcointrade.com.br/v1/market/create_order",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "{\n  \"currency\":\"".$currency."\",\n  \"amount\": ".$amount.",\n  \"type\": \"".$type."\",\n  \"subtype\": \"".$subtype."\",\n  \"unit_price\": ".$unitPrice."\n}",
-                CURLOPT_HTTPHEADER => array(
-                    "Authorization: ApiToken ".$this->apiKey,
-                    "Content-Type: application/json"
-                )
-            ));
+            $url = "https://api.bitcointrade.com.br/v1/market/create_order";
+            $method = 'POST';
 
-            $response = curl_exec($this->curl);
-            $err = curl_error($this->curl);
+            $response = $this->initCurl($url, $fields, $method);
 
-            curl_close($this->curl);
-
-            if ($err) {
-                return "cURL Error #:" . $err;
+            if ($response[0]) {
+                return "cURL Error #:" . $response[0];
             } else {
-                $response = json_decode($response);
+                $response = json_decode($response[1]);
                 return $response;
             }
+
         }
 
     }

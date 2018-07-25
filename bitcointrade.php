@@ -3,18 +3,15 @@
 class BitcoinTrade
 {
     protected $apiKey = null;
-    protected $curl = null;
 
     public function __construct()
     {
         $arguments = func_get_args();
-        $this->curl = curl_init();
         $this->apiKey = $arguments[0];
     }
 
     public function ticker($currency = 'BTC')
     {
-        $this->curl = curl_init();
 
         $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/ticker";
 
@@ -23,7 +20,6 @@ class BitcoinTrade
 
     public function orders($currency = 'BTC')
     {
-        $this->curl = curl_init();
 
         $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/orders";
 
@@ -49,7 +45,6 @@ class BitcoinTrade
         $end_time->setTimezone($timeZone);
         $end_time = date_format($end_time, DateTime::ATOM);
 
-        $this->curl = curl_init();
 
         $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/trades?start_time={$start_time}&end_time={$end_time}&page_size={$page_size}&current_page={$current_page}";
 
@@ -58,7 +53,6 @@ class BitcoinTrade
 
     public function orderbook($currency = 'BTC')
     {
-        $this->curl = curl_init();
 
         $apiURL = "https://api.bitcointrade.com.br/v1/market?currency={$currency}";
 
@@ -67,7 +61,6 @@ class BitcoinTrade
 
     public function summary($currency = 'BTC')
     {
-        $this->curl = curl_init();
 
         $apiURL = "https://api.bitcointrade.com.br/v1/market/summary?currency={$currency}";
 
@@ -137,6 +130,9 @@ class BitcoinTrade
 
     private function initCurl($url = '', $fields = [], $method = 'GET')
     {
+
+        $curl = curl_init();
+
         $fields = json_encode($fields);
 
         $header = [
@@ -156,13 +152,13 @@ class BitcoinTrade
             CURLOPT_HTTPHEADER => $header
         ];
 
-        curl_setopt_array($this->curl, $options);
+        curl_setopt_array($curl, $options);
 
-        $response = curl_exec($this->curl);
+        $response = curl_exec($curl);
 
-        $err = curl_error($this->curl);
+        $err = curl_error($curl);
 
-        curl_close($this->curl);
+        curl_close($curl);
 
         return $err
             ? "cURL Error #: {$$err}"

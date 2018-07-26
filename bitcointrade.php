@@ -14,7 +14,6 @@ class BitcoinTrade
   public function ticker($currency = 'BTC')
   {
     $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/ticker";
-    $apiKeyRequired = false;
 
     return $this->initCurl($apiURL);
   }
@@ -23,7 +22,6 @@ class BitcoinTrade
   public function orders($currency = 'BTC')
   {
     $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/orders";
-    $apiKeyRequired = false;
 
     return $this->initCurl($apiURL);
   }
@@ -49,7 +47,6 @@ class BitcoinTrade
     $end_time = date_format($end_time, DateTime::ATOM);
 
     $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/trades?start_time={$start_time}&end_time={$end_time}&page_size={$page_size}&current_page={$current_page}";
-    $apiKeyRequired = false;
     
     return $this->initCurl($apiURL);
   }

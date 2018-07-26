@@ -159,7 +159,7 @@ class BitcoinTrade
     }
 
     $options = [
-      CURLOPT_URL => $this->urlBase + $url,
+      CURLOPT_URL => $this->urlBase.$url,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,

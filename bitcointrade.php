@@ -55,7 +55,7 @@ class BitcoinTrade
   // API Documentation: https://apidocs.bitcointrade.com.br/#7aa82620-f7a2-7688-3081-bbb95afc3be3
   public function orderbook($currency = 'BTC')
   {
-    $apiURL = "/market?currency={$currency}";
+    $apiURL = $this->urlBase + "/market?currency={$currency}";
     $apiKeyRequired = true;
 
     return $this->initCurl($apiURL, $apiKeyRequired);
@@ -119,7 +119,7 @@ class BitcoinTrade
   // API Documentation: https://apidocs.bitcointrade.com.br/#5ef0088b-40ef-4668-2ac4-59e0b94e91f7
   public function balance()
   {
-    $apiURL = 'https://api.bitcointrade.com.br/v1/wallets/balance';
+    $apiURL = $this->urlBase + '/wallets/balance';
     $apiKeyRequired = true;
 
     return $this->initCurl($apiURL, $apiKeyRequired);
@@ -135,7 +135,7 @@ class BitcoinTrade
   ) {
     $fields = compact('currency', 'amount', 'type', 'subtype', 'unitPrice');
 
-    $apiURL = 'https://api.bitcointrade.com.br/v1/market/create_order';
+    $apiURL = $this->urlBase + '/market/create_order';
     $apiKeyRequired = true;
 
     return $this->initCurl($apiURL, $apiKeyRequired, $fields, 'POST');

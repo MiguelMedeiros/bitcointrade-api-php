@@ -134,9 +134,9 @@ class BitcoinTrade
     $amount = 0,
     $type ="buy",
     $subtype="limited",
-    $unitPrice = 0
+    $unit_price = 0
   ) {
-    $fields = compact('currency', 'amount', 'type', 'subtype', 'unitPrice');
+    $fields = compact('currency', 'amount', 'type', 'subtype', 'unit_price');
 
     $apiURL = '/market/create_order';
     $apiKeyRequired = true;

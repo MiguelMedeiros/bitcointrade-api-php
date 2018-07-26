@@ -76,4 +76,4 @@ $type ="buy";
 
 // balance
 //$balance = $exchange->balance();
-//var_dump($balance);
+//var_dump($balance->data);

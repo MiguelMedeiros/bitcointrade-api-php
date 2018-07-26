@@ -17,16 +17,16 @@ Para ter acesso aos métodos da classe você deve ter a API em mão e seguir o s
 require ("bitcointrade.php");
 
 // Cria instancia da classe Bitcoin Trade
-$apiKey = ''; // colocar a sua API nessa variável
+$apiKey = ''; // Colocar a sua API nessa variável (não é necessária para os métodos públicos)
 $exchange = new bitcoinTrade($apiKey);
 
-// variáveis para parametrização gerais
+// Variáveis para parametrização gerais
 $currency = 'BTC';
 $hours = 1;
 $page_size = 100;
 $current_page = 1;   
 ```
-## Métodos
+## Exemplos dos Métodos Públicos (Não há necessidade de usar API Key)
 ### Get Ticker
 ```php
 $ticker = $exchange->ticker($currency);
@@ -45,6 +45,7 @@ $trades = $exchange->trades($currency, $hours, $page_size, $current_page);
 var_dump($trades->data);
 ```
 
+## Exemplos dos Métodos Privados (Há necessidade de usar API Key)
 ### Get Orderbook
 ```php
 $orderbook = $exchange->orderbook($currency);

@@ -3,6 +3,7 @@
 class BitcoinTrade
 {
   protected $apiKey = null;
+  protected $urlBase = "https://api.bitcointrade.com.br/v1";
 
   public function __construct()
   {
@@ -13,7 +14,7 @@ class BitcoinTrade
   // API Documentation: https://apidocs.bitcointrade.com.br/#8e6f6b73-b2f8-c03a-9d60-a0159f2c6ce0
   public function ticker($currency = 'BTC')
   {
-    $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/ticker";
+    $apiURL = $this->urlBase + "/public/{$currency}/ticker";
 
     return $this->initCurl($apiURL);
   }
@@ -21,7 +22,7 @@ class BitcoinTrade
   // API Documentation: https://apidocs.bitcointrade.com.br/#dc3695f5-6129-e35c-153d-c629aee8fd48
   public function orders($currency = 'BTC')
   {
-    $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/orders";
+    $apiURL = $this->urlBase + "/public/{$currency}/orders";
 
     return $this->initCurl($apiURL);
   }
@@ -46,7 +47,7 @@ class BitcoinTrade
     $end_time->setTimezone($timeZone);
     $end_time = date_format($end_time, DateTime::ATOM);
 
-    $apiURL = "https://api.bitcointrade.com.br/v1/public/{$currency}/trades?start_time={$start_time}&end_time={$end_time}&page_size={$page_size}&current_page={$current_page}";
+    $apiURL = $this->urlBase + "/public/{$currency}/trades?start_time={$start_time}&end_time={$end_time}&page_size={$page_size}&current_page={$current_page}";
     
     return $this->initCurl($apiURL);
   }
@@ -54,7 +55,7 @@ class BitcoinTrade
   // API Documentation: https://apidocs.bitcointrade.com.br/#7aa82620-f7a2-7688-3081-bbb95afc3be3
   public function orderbook($currency = 'BTC')
   {
-    $apiURL = "https://api.bitcointrade.com.br/v1/market?currency={$currency}";
+    $apiURL = "/market?currency={$currency}";
     $apiKeyRequired = true;
 
     return $this->initCurl($apiURL, $apiKeyRequired);
@@ -63,7 +64,7 @@ class BitcoinTrade
   // API Documentation: https://apidocs.bitcointrade.com.br/#9a20d5e9-056b-7427-5f22-35f571f60411
   public function summary($currency = 'BTC')
   {
-    $apiURL = "https://api.bitcointrade.com.br/v1/market/summary?currency={$currency}";
+    $apiURL = $this->urlBase + "/market/summary?currency={$currency}";
     $apiKeyRequired = true;
 
     return $this->initCurl($apiURL, $apiKeyRequired);
@@ -91,7 +92,7 @@ class BitcoinTrade
     $end_time->setTimezone($timeZone);
     $end_time = date_format($end_time, DateTime::ATOM);
 
-    $apiURL = "https://api.bitcointrade.com.br/v1/market/user_orders/list?status={$status}&start_date={$start_time}&end_date={$end_time}&currency={$currency}&type={$type}&page_size={$page_size}&current_page={$current_page}";
+    $apiURL = $this->urlBase + "/market/user_orders/list?status={$status}&start_date={$start_time}&end_date={$end_time}&currency={$currency}&type={$type}&page_size={$page_size}&current_page={$current_page}";
     $apiKeyRequired = true;
 
     return $this->initCurl($apiURL, $apiKeyRequired);
@@ -109,7 +110,7 @@ class BitcoinTrade
   // API Documentation: https://apidocs.bitcointrade.com.br/#c3fbdb41-fdd6-108c-753d-5efcfeff7a7e
   public function estimatedPrice($currency = "BTC", $amount = 0, $type ="buy")
   {
-    $apiURL = "https://api.bitcointrade.com.br/v1/market/estimated_price?amount={$amount}&currency={$currency}&type={$type}";
+    $apiURL = $this->urlBase + "/market/estimated_price?amount={$amount}&currency={$currency}&type={$type}";
     $apiKeyRequired = true;
 
     return $this->initCurl($apiURL, $apiKeyRequired);
